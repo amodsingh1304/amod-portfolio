@@ -3,6 +3,8 @@ import { writeFile, readFile } from 'fs/promises';
 import { join } from 'path';
 import { PortfolioContent, defaultContent } from '@/lib/content';
 
+export const dynamic = 'force-dynamic';
+
 const CONTENT_FILE = join(process.cwd(), 'public', 'content.json');
 
 async function ensureContentFile(): Promise<void> {
