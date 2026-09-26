@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #12090C;
+  --surface: #1A1015;
+  --surface-2: #241116;
+  --line: #2E1A1A;
+  --ink: #F1F5F9;
+  --muted: #A8A29E;
+  --primary: #F59E0B;
+  --primary-dark: #D97706;
+  --primary-light: #FBBF24;
+  --violet: #F97316;
+  --cyan: #EC4899;
+  --emerald: #8B5CF6;
+  --amber: #FB923C;
+  --rose: #EF4444;
+  --ok: #34D399;
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --max: 80rem;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; color-scheme: dark; overflow-x: hidden; }
+body { overflow-x: hidden; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d080b 0%, #1a0f12 40%, #231116 70%, #120c09 100%);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; }
+
+::selection { background: rgba(249, 115, 22, 0.3); }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.gradient-text {
+  background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(120deg, var(--primary-light), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(120deg, var(--primary), var(--violet), var(--cyan), var(--primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 4s ease infinite;
+}
+
+.btn-gradient {
+  background: linear-gradient(120deg, var(--primary), var(--violet), var(--cyan), var(--primary));
+  background-size: 200% auto;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.text-gradient-accent {
+  background: linear-gradient(120deg, var(--cyan), var(--emerald), var(--amber));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 4s ease infinite;
+}
+
+.glow-headline {
+  text-shadow: 0 0 8px rgba(249, 115, 22, 0.35);
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(249, 115, 22, 0.18); }
+  50% { box-shadow: 0 0 26px rgba(249, 115, 22, 0.38); }
+}
+
+.glow-pulse {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes borderBright {
+  0%, 100% { border-color: rgba(249, 115, 22, 0.4); }
+  50% { border-color: rgba(249, 115, 22, 0.9); }
+}
+
+.border-thin-shine {
+  border: 1px solid rgba(249, 115, 22, 0.6);
+  background: rgba(17, 27, 46, 0.6);
+  animation: borderBright 2s ease-in-out infinite;
+}
+
+.heading-accent {
+  position: relative;
+  display: inline-block;
+}
+.heading-accent::after {
+  content: "";
+  position: absolute;
+  bottom: -0.6rem;
+  left: 0;
+  width: 3.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--violet), var(--cyan));
+}
+
+.card-accent {
+  position: relative;
+}
+.card-accent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, var(--primary), var(--violet), var(--cyan));
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: rotate(25deg);
+  animation: shine 3s linear infinite;
+  pointer-events: none;
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.35s ease, transform 0.25s ease;
+}
+.card-shine:hover {
+  box-shadow: 0 0 28px -6px rgba(249, 115, 22, 0.25);
+}
+.card-shine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, transparent 30%, rgba(249, 115, 22, 0.16), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.card-shine:hover::before {
+  opacity: 1;
+}
+
+.hero-glow {
+  position: relative;
+}
+.hero-glow::before {
+  content: "";
+  position: absolute;
+  inset: -15% -30% auto;
+  height: 40rem;
+  z-index: -1;
+  background: radial-gradient(ellipse at 35% 25%, rgba(249, 115, 22, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.status-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 8px var(--ok);
+}
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.4) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.4);
+  border-radius: 2px;
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .container-p { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+}

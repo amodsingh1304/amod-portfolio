@@ -1,0 +1,228 @@
+{
+  "hero": {
+    "name": "Amod Kumar Singh",
+    "title": "Software Developer | Java Backend & AI/Cloud Integration",
+    "description": "I build backend services and intelligent verification solutions using Java, Spring Boot, REST APIs, PostgreSQL, AWS, and Azure. Currently working on KYC and AI-powered verification platforms, with hands-on experience in backend development, cloud integration, face and voice verification, OCR, sentiment analysis, property inspection, and secure verification workflows.",
+    "headline": "Building verification systems that people can actually trust.",
+    "logo": "/uploads/logo.jpg"
+  },
+  "about": {
+    "content": "I'm a Software Developer with a B.Tech in Computer Science Engineering (2021–2025). Currently working at Qualtech Edge Pvt. Ltd., I specialize in Java backend development and AI/cloud integration.\n\nMy expertise lies in building scalable backend services using Spring Boot, REST APIs, and microservices architecture. I've developed comprehensive KYC and AI verification platforms that integrate with AWS and Azure services for face verification, voice verification, OCR, and sentiment analysis.\n\nI'm passionate about creating secure, efficient systems that solve real-world problems. My work focuses on backend development, cloud integration, and implementing AI-powered verification solutions for enterprise applications.\n\nI'm passionate about creating secure, efficient systems that solve real-world problems. My work focuses on backend development, cloud integration, and implementing AI-powered verification solutions for enterprise applications.\n\nI'm passionate about creating secure, efficient systems that solve real-world problems. My work focuses on backend development, cloud integration, and implementing AI-powered verification solutions for enterprise applications.\n\nI'm passionate about creating secure, efficient systems that solve real-world problems. My work focuses on backend development, cloud integration, and implementing AI-powered verification solutions for enterprise applications.",
+    "statistics": {
+      "years": "0.6+",
+      "projects": "4+",
+      "technologies": "15+",
+      "satisfaction": "100%"
+    }
+  },
+  "skills": {
+    "categories": [
+      {
+        "title": "Backend Development",
+        "skills": [
+          "Java",
+          "Spring Boot",
+          "REST APIs",
+          "Microservices",
+          "JPA/Hibernate"
+        ]
+      },
+      {
+        "title": "Frontend Development",
+        "skills": [
+          "Next.js",
+          "JavaScript",
+          "HTML",
+          "Tailwind CSS"
+        ]
+      },
+      {
+        "title": "Database",
+        "skills": [
+          "PostgreSQL",
+          "MySQL",
+          "Redis"
+        ]
+      },
+      {
+        "title": "Cloud & AI",
+        "skills": [
+          "AWS",
+          "Azure",
+          "AWS Rekognition",
+          "Gemini",
+          "ONNX Runtime"
+        ]
+      },
+      {
+        "title": "Security",
+        "skills": [
+          "JWT",
+          "Keycloak"
+        ]
+      },
+      {
+        "title": "Tools & DevOps",
+        "skills": [
+          "Git",
+          "Maven",
+          "Docker",
+          "Postman",
+          "Nginx"
+        ]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "company": "Qualtech Edge Pvt.Ltd",
+      "position": "Software Developer",
+      "project": "Customer Connect — KYC & AI Verification Platform",
+      "period": "Nov-2025 To Sep-2026",
+      "description": [
+        "Developed Spring Boot microservices for scalable backend architecture",
+        "Built comprehensive KYC APIs for customer verification workflows",
+        "Created Property Inspection API for shop, factory, and billboard analysis",
+        "Implemented self, field, and agent verification systems",
+        "Developed HTML verification reports with dynamic content generation",
+        "Integrated face verification using AWS Rekognition and custom AI models",
+        "Built voice verification system with speaker identification and anti-spoofing",
+        "Implemented sentiment analysis for customer interaction insights",
+        "Integrated AWS and Azure services for cloud-based AI processing",
+        "Set up Twilio integration for communication services"
+      ],
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "AWS",
+        "Azure",
+        "React",
+        "Redis",
+        "Keycloak"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Customer Connect — KYC & AI Verification Platform",
+      "description": "Comprehensive KYC and AI-powered verification platform for customer onboarding and identity verification",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "AWS",
+        "Azure",
+        "React",
+        "Redis",
+        "Keycloak"
+      ],
+      "features": [
+        "Spring Boot microservices architecture",
+        "REST APIs for verification workflows",
+        "Multi-tenant authentication with JWT/Keycloak",
+        "Face verification with AWS Rekognition",
+        "Voice verification with speaker identification",
+        "OCR for document processing",
+        "Sentiment analysis integration",
+        "HTML report generation"
+      ]
+    },
+    {
+      "title": "AI Property Inspection System",
+      "description": "Property analysis platform using AI for shop, factory, and billboard inspection with automated reporting",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "AWS AI Services",
+        "React"
+      ],
+      "features": [
+        "Shop analysis and classification",
+        "Factory inspection workflows",
+        "Billboard analysis and verification",
+        "Evidence upload and management",
+        "AI-powered property analysis",
+        "Automated HTML report generation",
+        "Property Inspection API development"
+      ]
+    },
+    {
+      "title": "Face Verification & Consistency System",
+      "description": "Advanced face verification system ensuring identity consistency across verification processes",
+      "technologies": [
+        "AWS Rekognition",
+        "Java",
+        "Spring Boot",
+        "React",
+        "AI/ML"
+      ],
+      "features": [
+        "Reference image management",
+        "Video and image verification",
+        "Face detection and recognition",
+        "Same-face consistency checking",
+        "Background and object analysis",
+        "Anti-spoofing measures",
+        "Real-time verification processing"
+      ]
+    },
+    {
+      "title": "Voice Verification System",
+      "description": "Speaker verification and identification system using advanced voice analysis",
+      "technologies": [
+        "Python",
+        "SpeechBrain",
+        "ONNX Runtime",
+        "Java",
+        "Spring Boot"
+      ],
+      "features": [
+        "Voice enrollment and registration",
+        "Speaker verification workflows",
+        "Speaker identification",
+        "Anti-spoofing protection",
+        "Voice biometric analysis",
+        "ONNX Runtime for model deployment",
+        "Integration with verification platform"
+      ]
+    }
+  ],
+  "contact": {
+    "email": "amodsingh1304@gmail.com",
+    "location": "Noida, Uttar Pradesh",
+    "github": "https://github.com/amodsingh1304",
+    "linkedin": "https://www.linkedin.com/in/amod-singh-508077266/"
+  },
+  "settings": {
+    "showHero": true,
+    "showSkills": true,
+    "showExperience": true,
+    "showProjects": true,
+    "showContact": true,
+    "hero": {
+      "showButtons": true,
+      "showLogo": true,
+      "showName": true,
+      "showTitle": true
+    },
+    "skills": {
+      "showCategories": []
+    },
+    "experience": {
+      "showItems": [
+        true
+      ]
+    },
+    "projects": {
+      "showItems": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "contact": {}
+  }
+}
