@@ -36,6 +36,7 @@ next-env.d.ts
 # admin uploads
 /public/uploads
 
+
 # OS files
 Thumbs.db
 

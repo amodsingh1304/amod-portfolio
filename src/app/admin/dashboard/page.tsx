@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import { isAdminAuthenticated, logoutAdmin } from '@/lib/auth';
 import { PortfolioContent } from '@/lib/content';
 
+const CLOUDINARY_CLOUD_NAME = 'odccxlqr';
+const CLOUDINARY_UPLOAD_PRESET = 'portfolio';
+
 export default function AdminDashboard() {
   const router = useRouter();
   const [content, setContent] = useState<PortfolioContent | null>(null);
@@ -115,17 +118,18 @@ export default function AdminDashboard() {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('logo', file);
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
         method: 'POST',
         body: formData,
       });
       const data = await response.json();
 
-      if (data.url) {
-        setContent({ ...content, hero: { ...content.hero, logo: data.url } });
+      if (data.secure_url) {
+        setContent({ ...content, hero: { ...content.hero, logo: data.secure_url } });
         setSaveMessage('Logo uploaded successfully!');
         setTimeout(() => setSaveMessage(''), 3000);
       } else {
