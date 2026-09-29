@@ -135,7 +135,6 @@ export const defaultContent: PortfolioContent = {
         "Built voice verification system with speaker identification and anti-spoofing",
         "Implemented sentiment analysis for customer interaction insights",
         "Integrated AWS and Azure services for cloud-based AI processing",
-        "Set up Twilio integration for communication services",
         "Implemented JWT and Keycloak for secure authentication and multi-tenancy"
       ],
       technologies: ["Java", "Spring Boot", "PostgreSQL", "AWS", "Azure", "React", "Redis", "Keycloak"]
@@ -238,3 +237,85 @@ export const defaultContent: PortfolioContent = {
     }
   }
 };
+
+export function normalizeContent(input: any): PortfolioContent {
+  const data = input || {};
+  const hero = data.hero || {};
+  const about = data.about || {};
+
+  // Support both old (hero + about) and new merged (about with name/title/etc.) structures
+  const name = hero.name ?? about.name ?? '';
+  const title = hero.title ?? about.title ?? '';
+  const headline = hero.headline ?? about.headline ?? '';
+  const logo = hero.logo ?? about.logo ?? '';
+  const description = hero.description ?? about.content ?? '';
+  const content = about.content ?? hero.description ?? '';
+  const statistics = about.statistics ?? hero.statistics ?? {};
+
+  return {
+    hero: {
+      name,
+      title,
+      headline,
+      description,
+      logo,
+    },
+    about: {
+      content,
+      statistics: {
+        years: statistics.years ?? '',
+        projects: statistics.projects ?? '',
+        technologies: statistics.technologies ?? '',
+        satisfaction: statistics.satisfaction ?? '',
+      },
+    },
+    skills: {
+      categories: Array.isArray(data.skills?.categories) ? data.skills.categories : [],
+    },
+    experience: Array.isArray(data.experience) ? data.experience : [],
+    projects: Array.isArray(data.projects) ? data.projects : [],
+    contact: {
+      email: data.contact?.email ?? '',
+      location: data.contact?.location ?? '',
+      github: data.contact?.github ?? '',
+      linkedin: data.contact?.linkedin ?? '',
+    },
+    settings: {
+      showHero: data.settings?.showHero ?? data.settings?.showAbout ?? true,
+      showSkills: data.settings?.showSkills ?? true,
+      showExperience: data.settings?.showExperience ?? true,
+      showProjects: data.settings?.showProjects ?? true,
+      showContact: data.settings?.showContact ?? true,
+      hero: {
+        showName: data.settings?.hero?.showName ?? data.settings?.about?.showName ?? true,
+        showHeadline: data.settings?.hero?.showHeadline ?? data.settings?.about?.showHeadline ?? true,
+        showTitle: data.settings?.hero?.showTitle ?? data.settings?.about?.showTitle ?? true,
+        showContent: data.settings?.hero?.showContent ?? data.settings?.about?.showContent ?? true,
+        showStatistics: data.settings?.hero?.showStatistics ?? data.settings?.about?.showStatistics ?? true,
+        showLogo: data.settings?.hero?.showLogo ?? data.settings?.about?.showLogo ?? true,
+        showButtons: data.settings?.hero?.showButtons ?? data.settings?.about?.showButtons ?? true,
+      },
+      skills: {
+        showCategories: Array.isArray(data.settings?.skills?.showCategories)
+          ? data.settings.skills.showCategories
+          : [],
+      },
+      experience: {
+        showItems: Array.isArray(data.settings?.experience?.showItems)
+          ? data.settings.experience.showItems
+          : [],
+      },
+      projects: {
+        showItems: Array.isArray(data.settings?.projects?.showItems)
+          ? data.settings.projects.showItems
+          : [],
+      },
+      contact: {
+        showEmail: data.settings?.contact?.showEmail ?? true,
+        showLocation: data.settings?.contact?.showLocation ?? true,
+        showGithub: data.settings?.contact?.showGithub ?? true,
+        showLinkedin: data.settings?.contact?.showLinkedin ?? true,
+      },
+    },
+  };
+}

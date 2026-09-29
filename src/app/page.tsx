@@ -53,7 +53,7 @@ export default function Home() {
   const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   useEffect(() => {
-    fetch('/api/content')
+    fetch('/api/content', { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data: PortfolioContent) => {
         if (data?.hero) setContent(data);

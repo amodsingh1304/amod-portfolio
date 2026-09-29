@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, readFile } from 'fs/promises';
 import { join } from 'path';
 import { createClient } from '@supabase/supabase-js';
-import { PortfolioContent, defaultContent } from '@/lib/content';
+import { PortfolioContent, defaultContent, normalizeContent } from '@/lib/content';
 
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 
 const CONTENT_FILE = join(process.cwd(), 'public', 'content.json');
 const TABLE = 'portfolio_content';
@@ -14,6 +15,14 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase =
   supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+
+const cacheHeaders = {
+  'Cache-Control': 'no-store, max-age=0, must-revalidate',
+};
+
+function jsonResponse(body: any, status = 200) {
+  return NextResponse.json(body, { status, headers: cacheHeaders });
+}
 
 async function ensureContentFile(): Promise<void> {
   try {
@@ -27,7 +36,7 @@ async function ensureContentFile(): Promise<void> {
 async function readFromFile(): Promise<PortfolioContent> {
   await ensureContentFile();
   const content = await readFile(CONTENT_FILE, 'utf-8');
-  return JSON.parse(content);
+  return normalizeContent(JSON.parse(content));
 }
 
 export async function GET() {
@@ -39,35 +48,43 @@ export async function GET() {
         .eq('id', ROW_ID)
         .maybeSingle();
 
-      if (!error && data?.data) {
-        return NextResponse.json(data.data);
+      if (error) {
+        console.error('Supabase GET error:', error);
+        const fileContent = await readFromFile();
+        return jsonResponse(fileContent);
+      }
+
+      if (data?.data) {
+        return jsonResponse(normalizeContent(data.data));
       }
 
       // Row missing — seed it from the current file content
-      if (!error) {
-        const fileContent = await readFromFile();
-        await supabase
-          .from(TABLE)
-          .upsert({ id: ROW_ID, data: fileContent });
-        return NextResponse.json(fileContent);
+      const fileContent = await readFromFile();
+      const { error: seedError } = await supabase
+        .from(TABLE)
+        .upsert({ id: ROW_ID, data: fileContent });
+
+      if (seedError) {
+        console.error('Supabase seed error:', seedError);
       }
+      return jsonResponse(fileContent);
     }
 
     const content = await readFromFile();
-    return NextResponse.json(content);
+    return jsonResponse(content);
   } catch (error) {
-    return NextResponse.json(defaultContent, { status: 200 });
+    return jsonResponse(normalizeContent(defaultContent), 200);
   }
 }
 
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    const content: PortfolioContent = body;
+    const content: PortfolioContent = normalizeContent(body);
 
     // Validate content structure
     if (!content.hero || !content.about || !content.skills || !content.experience || !content.projects || !content.contact) {
-      return NextResponse.json({ error: 'Invalid content structure' }, { status: 400 });
+      return jsonResponse({ error: 'Invalid content structure' }, 400);
     }
 
     // Ensure statistics exist
@@ -87,20 +104,24 @@ export async function PUT(request: NextRequest) {
         .from(TABLE)
         .upsert({ id: ROW_ID, data: content });
 
-      if (!error) {
-        return NextResponse.json({ success: true, stored: 'supabase' });
+      if (error) {
+        return jsonResponse(
+          { error: 'Supabase save failed', details: error.message },
+          500
+        );
       }
+      return jsonResponse({ success: true, stored: 'supabase' });
     }
 
     // Fallback: write to local file (local development)
     try {
       await ensureContentFile();
       await writeFile(CONTENT_FILE, JSON.stringify(content, null, 2), 'utf-8');
-      return NextResponse.json({ success: true, stored: 'file' });
+      return jsonResponse({ success: true, stored: 'file' });
     } catch {
-      return NextResponse.json({ error: 'Failed to save content' }, { status: 500 });
+      return jsonResponse({ error: 'Failed to save content' }, 500);
     }
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to save content' }, { status: 500 });
+    return jsonResponse({ error: 'Failed to save content' }, 500);
   }
 }
