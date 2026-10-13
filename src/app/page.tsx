@@ -252,13 +252,13 @@ export default function Home() {
       <section id={'about'} className={'pt-28 pb-20 md:pt-40 md:pb-32 hero-glow'}>
         <div className={'container-p'}>
           <div className={'reveal'}>
-            {hero.headline && showHeadline && (
+            {showTitle && hero.title && (
               <h1 className={'heading-accent text-3xl md:text-3xl font-extrabold leading-tight mb-5 text-gradient-primary'}>
-                {hero.headline}
+                {hero.title}
               </h1>
             )}
-            {showTitle && (
-              <p className={'inline-block max-w-full break-words px-4 py-2 rounded-lg bg-[#16233A]/80 border border-slate-700 text-sm font-semibold text-amber-300 mb-6'}>{hero.title}</p>
+            {showHeadline && hero.headline && (
+              <p className={'inline-block max-w-full break-words px-4 py-2 rounded-lg bg-[#16233A]/80 border border-slate-700 text-sm font-semibold text-amber-300 mb-6'}>{hero.headline}</p>
             )}
             <div className={'flex flex-col lg:flex-row gap-6 mb-8'}>
               {showContentBox && (
